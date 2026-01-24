@@ -306,28 +306,28 @@ input[type="file"]:hover {
   background: #b91c1c;
   transform: scale(1.1);
 }
-#toolsimage {
-    width: 1208px;
-    justify-content: center;
-    align-items: center;
-    background: rgb(0, 0, 0);
-    display: flex;
-    justify-items: center;
-    padding-bottom: 3px;
-    border-radius: 15px;
-    align-self: center;
-    justify-self: center;
-    margin-top: 30px;
-}
-#tools{
-    border-radius: 15px;
-    box-shadow: #000000;
-    width: 1200px;
-    align-self: center;
-    padding-top: 3px;
-    
 
+#toolsimage {
+  width: 100%;
+  max-width: 1200px;        
+  margin: 30px auto;
+  padding: 10px;
+  background: #000;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
+
+#tools {
+  width: 100%;
+  max-width: 1180px;       
+  height: auto;            
+  border-radius: 15px;
+  object-fit: contain;
+}
+
 .prescription{
     background: #565454;
 }
@@ -368,3 +368,4 @@ input[type="file"]:hover {
 
 .arrow.left { left: 15px; }
 .arrow.right { right: 15px; }
+
