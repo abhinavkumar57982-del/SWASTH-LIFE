@@ -97,5 +97,62 @@ All without storing sensitive personal data.
 
 ---
 
-## 🧠 Architecture Overview
+
+---
+
+## ⚠️ OCR Accuracy Note
+
+- The **Prescription Analyzer is fully functional**
+- OCR works **best with clear, high-quality prescription images**
+- Accuracy may reduce for:
+  - Handwritten prescriptions
+  - Blurry or low-resolution images
+- This limitation is expected in client-side OCR systems  
+- Accuracy can be improved in future using **Google ML Kit / Vision API**
+
+---
+
+## 🌍 Social Impact
+
+- Helps users understand medicines safely
+- Reduces misuse due to unreadable prescriptions
+- Supports rural and student communities
+- No data storage → privacy-friendly
+- Encourages health awareness & responsibility
+
+---
+
+## 🔮 Future Improvements
+
+- Integration with **Google ML Kit OCR** for higher accuracy
+- Multilingual support (Hindi, regional languages)
+- Doctor consultation chatbot
+- Cloud-based anonymous analytics
+- Emergency SOS feature
+- Verified medicine database (Gov / WHO APIs)
+
+---
+
+## 🏆 Hackathon Readiness
+
+✔ Innovative healthcare approach  
+✔ Real working prototype  
+✔ Scalable architecture  
+✔ Strong social impact  
+✔ Effective use of web & Google ecosystem  
+
+---
+
+## 📌 Disclaimer
+
+This project is **for educational and awareness purposes only**.  
+It does **not replace professional medical advice**. Always consult a qualified healthcare professional.
+
+---
+
+## 👨‍💻 Built By
+**Student Innovators**  
+Hackathon Project – 2026 🚀
+
+
 
