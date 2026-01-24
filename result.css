@@ -1,0 +1,370 @@
+/* ===== GENERAL ===== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #99b6ba; /* light, clean background */
+  margin: 0;
+  padding: 20px;
+  color: #1f2937;
+}
+
+/* ===== HEADINGS ===== */
+h1, h2 {
+  text-align: center;
+  color: #1e40af; /* darker blue, easy on eyes */
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* ===== GRID LAYOUT ===== */
+.single-container {
+  max-width: 1150px;
+  margin: auto;
+  padding: 10px;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 30px; /* more space between items */
+  align-items: stretch;
+}
+
+
+/* GRID POSITIONS */
+.prescription { grid-row: 1 / span 2; }
+.stores { grid-column: 2; grid-row: 1; }
+.reminder { grid-column: 3; grid-row: 1; }
+.availability { grid-column: 2; grid-row: 2; }
+.log { grid-column: 3; grid-row: 2; }
+
+/* ===== GRID ITEMS ===== */
+.grid-item {
+  background: #9bd5de;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.image{
+    height: 200px;
+    width: 200px;
+    justify-content: center;
+    align-self: center;
+    display: flex;
+    border-radius: 15px;
+}
+
+.grid-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+}
+
+/* Buttons */
+.grid-item button {
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.grid-item button:hover {
+  background: #1e40af;
+}
+
+/* ===== PRESCRIPTION BOX ===== */
+.prescription .box {
+  background: #f0f4ff; /* lighter blue */
+  padding: 20px;
+  border-radius: 18px;
+  text-align: center;
+  min-height: 600px; /* reduced from 720px */
+  box-shadow: 0 10px 25px rgba(37,99,235,0.08);
+}
+
+.box h2 { font-size: 1.6rem; color: #1e40af; margin-bottom: 10px; }
+.box h3 { margin-top: 20px; color: #334155; font-weight: 600; }
+
+/* Upload Icon */
+.upload-icon { width: 100px; margin: 12px auto; display: block; }
+
+/* File Input */
+input[type="file"] {
+  background: #e6f0ff;
+  border: 2px dashed #93c5fd;
+  padding: 12px;
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+input[type="file"]:hover {
+  background: #dbe9ff;
+  border-color: #2563eb;
+}
+
+/* ===== RESULTS ===== */
+.result {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  max-height: 240px;
+  overflow-y: auto;
+  border-left: 4px solid #3b82f6;
+  text-align: left;
+  line-height: 1.5;
+}
+
+#info {
+  background: #f7fff7; /* soft green for medicine info */
+  border-left: 5px solid #16a34a;
+  margin-top: 12px;
+  padding: 12px;
+  font-size: 0.95rem;
+}
+
+/* ===== HEALTH LOG TEXTAREA ===== */
+#logInput {
+  width: 100%;
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+/* ===== MAP ===== */
+#map {
+  width: 100%;
+  height: 400px;
+  border-radius: 16px;
+  margin: 30px auto 0 auto;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  display: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 1000px){
+  .grid-layout { grid-template-columns: 1fr; }
+  .prescription, .stores, .reminder, .availability, .log {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media(max-width: 600px){
+  .box { min-height: 500px; padding: 18px; }
+  .upload-icon { width: 80px; }
+  button { font-size: 0.95rem; padding: 10px 0; }
+  #reminderBox { width: 90%; }
+}
+.back-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: white;
+  color: #1c3c3e;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+  transition: background 0.3s, transform 0.2s;
+}
+/* ===== REMINDER POPUP MODAL ===== */
+#reminderModal {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.45); /* soft overlay */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+#reminderModal.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* MODAL BOX */
+#reminderBox {
+  background: #ffffff;
+  padding: 25px 20px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* HEADER */
+#reminderBox h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2563eb;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #2563eb33, #93c5fd33);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* INPUT FIELDS */
+#reminderBox input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #2d6dba;
+  margin-bottom: 14px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+#reminderBox input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 5px rgba(37,99,235,0.3);
+  outline: none;
+}
+
+/* BUTTONS */
+#reminderBox button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgb(65, 118, 232);
+}
+
+#reminderBox button:nth-child(1) { background: #a3b6da; color: #3369dd; } /* Save locally */
+#reminderBox button:nth-child(2) { background: #2563eb; color: #fff; } /* Google Calendar */
+#reminderBox button:nth-child(3) { background: #dc2626; color: #fff; } /* Close */
+
+#reminderBox button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+#reminderBox button:nth-child(3):hover { background: #b91c1c; }
+#reminderBox button:nth-child(2):hover { background: #1e40af; }
+
+/* REMINDER LIST */
+#popupReminderList {
+  list-style: none;
+  padding-left: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 15px;
+}
+
+#popupReminderList li {
+  background: #a8b5ce;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+#popupReminderList li button {
+  background: #dc2626;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+#popupReminderList li button:hover {
+  background: #b91c1c;
+  transform: scale(1.1);
+}
+#toolsimage {
+    width: 1208px;
+    justify-content: center;
+    align-items: center;
+    background: rgb(0, 0, 0);
+    display: flex;
+    justify-items: center;
+    padding-bottom: 3px;
+    border-radius: 15px;
+    align-self: center;
+    justify-self: center;
+    margin-top: 30px;
+}
+#tools{
+    border-radius: 15px;
+    box-shadow: #000000;
+    width: 1200px;
+    align-self: center;
+    padding-top: 3px;
+    
+
+}
+.prescription{
+    background: #565454;
+}
+.slider {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.arrow.left { left: 15px; }
+.arrow.right { right: 15px; }

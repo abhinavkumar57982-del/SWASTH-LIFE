@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+<meta charset="UTF-8">
+<title>Result Page</title>
+<link rel="stylesheet" href="result.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<style>
+
+
+</style>
+
+
+</head>
+<!-- GO BACK BUTTON -->
+<div class="back-btn" onclick="goBack()">
+  ← Back
+</div>
+<div class="slider">
+  <img class="slide active" src="image copy.png">
+  <img class="slide" src="result banner slider image2.png">
+  <img class="slide" src="result banner slider image3.png">
+  <!-- <img class="slide" src="WhatsApp Image 2026-01-13 at 1.03.55 AM.jpeg"> -->
+
+  <!-- Arrows -->
+  <button class="arrow left">&#10094;</button>
+  <button class="arrow right">&#10095;</button>
+</div>
+<div id="toolsimage">
+  <img id="tools" src="tools.jpeg" alt="">
+</div>
+<div class="container single-container">
+
+  <div class="grid-layout">
+
+    <!-- LEFT : Prescription -->
+    <div class="grid-item prescription">
+      <div class="box">
+        <h2>📄 Prescription Analyzer</h2>
+        <img src="uploader.png" class="upload-icon">
+        <h3>Upload Prescription</h3>
+
+        <input type="file" id="img" accept="image/*">
+        <br><br>
+        <button onclick="startOCR()">Analyze</button>
+
+        <h3>Extracted Text</h3>
+        <div class="result" id="text"></div>
+
+        <h3>Medicine Info</h3>
+        <div class="result" id="info"></div>
+      </div>
+    </div>
+
+    <!-- MIDDLE TOP : Medical Stores -->
+    <div class="grid-item stores">
+      <h2>🏥 Medical Stores</h2>
+      <img class="image" src="medical store logo.png" alt="">
+      <button onclick="loadNearbyPharmacies()">
+        Show Nearby Medical Stores
+      </button>
+    </div>
+
+    <!-- RIGHT TOP : Reminder -->
+    <div class="grid-item reminder">
+      <h2>⏰ Reminder</h2>
+      <img class="image" src="remainder logo.png" alt="">
+      <button id="reminderBtn">Set Reminder</button>
+    </div>
+
+    <!-- MIDDLE BOTTOM : Availability -->
+    <div class="grid-item availability">
+      <h2>💊 Availability</h2>
+      <img class="image" src="availibilty logo.png" alt="">
+      <button onclick="location.href='availability.html'">
+        Check Medicine Availability
+      </button>
+    </div>
+
+    <!-- RIGHT BOTTOM : Daily Log -->
+    <div class="grid-item log">
+      <h2>📝 Daily Health Log</h2>
+
+      <input type="date" id="logDate">
+
+      <textarea id="logInput"
+        placeholder="Meals, steps, mood, medicines..."
+        rows="4"></textarea>
+
+      <button onclick="saveLog()">Save Log</button>
+      <ul id="logList"></ul>
+    </div>
+
+  </div>
+
+</div>
+<div id="reminderModal">
+  <div id="reminderBox">
+    <h2>Set Medicine Reminder</h2>
+
+    <input id="medNamePopup" placeholder="Medicine name" style="width:100%;padding:8px;"><br><br>
+    <input type="time" id="medTimePopup" style="width:100%;padding:8px;"><br><br>
+
+    <button onclick="addReminder()">Save Locally</button>
+    <button onclick="addToGoogleCalendar()">Add to Google Calendar 📅</button>
+    <button onclick="closeReminder()">Close</button>
+
+    <h3>My Local Reminders</h3>
+    <ul id="popupReminderList"></ul>
+  </div>
+</div>
+<!-- MAP -->
+<div id="map"></div>
+
+
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  const logList = document.getElementById("logList");
+const logInput = document.getElementById("logInput");
+const logDate = document.getElementById("logDate");
+
+logDate.valueAsDate = new Date(); // default today
+
+let logs = JSON.parse(localStorage.getItem("dailyLogs") || "[]");
+
+function renderLogs(){
+  logList.innerHTML = "";
+  logs.forEach(l=>{
+    const li = document.createElement("li");
+    li.textContent = `${l.date}: ${l.text}`;
+    logList.appendChild(li);
+  });
+}
+
+function saveLog(){
+  const text = logInput.value.trim();
+  const date = logDate.value;
+  if(!text) return alert("Enter log details!");
+  logs.push({date,text});
+  localStorage.setItem("dailyLogs", JSON.stringify(logs));
+  logInput.value = "";
+  renderLogs();
+}
+
+renderLogs();
+
+  let isMockData = false;
+
+/* ---------- MEDICINE KNOWLEDGE BASE ---------- */
+/*const medicineDB = {
+  paracetamol:{
+    use:"Relieves pain and reduces fever",
+    how:"Take after food. Max 4 doses/day.",
+    sideEffects:"Nausea, liver damage if overdosed"
+  },
+  aspirin:{
+    use:"Pain relief and anti-inflammatory",
+    how:"Take after meals with water",
+    sideEffects:"Stomach irritation, bleeding risk"
+  },
+  ibuprofen:{
+    use:"Pain and inflammation relief",
+    how:"Take after food only",
+    sideEffects:"Stomach pain, dizziness"
+  },
+  amoxicillin:{
+    use:"Antibiotic for bacterial infection",
+    how:"Complete full prescribed course",
+    sideEffects:"Diarrhea, rash"
+  }
+};
+
+/* ---------- OCR LOAD ---------- */
+/* ---------- OCR LOAD + MOCK HANDLING ---------- */
+// let ocrText = localStorage.getItem("extractedText");
+
+/* MOCK FALLBACK (important) */
+// if(!ocrText || ocrText.trim().length < 3){
+//   ocrText = "Paracetamol Aspirin";
+// }
+
+/* SHOW OCR TEXT */
+// document.getElementById("ocrText").innerText = ocrText;
+
+/* ANALYZE */
+// analyzePrescription(ocrText);
+
+
+/* ---------- MEDICINE DETECTION ---------- */
+// function extractMedicinesFromText(text){
+//   text = text.toLowerCase();
+//   const cleanText = text.replace(/[^a-z\s]/g, " ");
+
+//   const found = Object.keys(medicineDB).filter(med =>
+//     cleanText.includes(med)
+//   );
+
+//   // 🔧 MOCK DATA CONDITION
+//   if(found.length === 0 && cleanText.split(" ").length < 5){
+//     isMockData = true;
+//     return ["paracetamol", "aspirin"];
+//   }
+
+//   isMockData = false;
+//   return found;
+// }
+
+
+/* ---------- AI-LIKE ANALYSIS ---------- */
+// function analyzePrescription(text){
+//   const found = extractMedicinesFromText(text);
+//   const box = document.getElementById("medicineAnalysis");
+//   const ocrBox = document.getElementById("ocrText");
+
+//   // 🚫 Hide OCR text ONLY for mock data
+//   if(isMockData){
+//     ocrBox.style.display = "none";
+//   }else{
+//     ocrBox.style.display = "block";
+//   }
+
+//   if(found.length === 0){
+//     box.innerText =
+//       "⚠️ Medicine not clearly identified.\nPlease consult a doctor.";
+//     box.style.display = "block";
+//     return;
+//   }
+
+//   let output = "💊 Medicine Analysis\n\n";
+//   found.forEach(med=>{
+//     const info = medicineDB[med];
+//     output +=
+// `✔ ${med.toUpperCase()}
+// • Use: ${info.use}
+// • How to take: ${info.how}
+// • Side effects: ${info.sideEffects}
+
+// `;
+//   });
+
+//   box.innerText = output;
+//   box.style.display = "block";
+// }
+// --------ANALYSER-------
+async function startOCR(){
+  const img = document.getElementById("img").files[0];
+  if(!img){ alert("Upload prescription"); return; }
+
+  document.getElementById("text").innerText="Reading...";
+  document.getElementById("info").innerText="";
+
+  const { data:{ text } } = await Tesseract.recognize(img,"eng");
+  document.getElementById("text").innerText=text;
+
+  detectMedicine(text);
+}
+
+function detectMedicine(text){
+  const words = text
+    .toLowerCase()
+    .replace(/[^a-z\s]/g," ")
+    .split(/\s+/);
+
+  // common non-medicine words to ignore
+  const blacklist = [
+    "tablet","tablets","capsule","capsules","mg","ml",
+    "morning","night","daily","after","before","food"
+  ];
+
+  const candidates = [...new Set(words)]
+    .filter(w => w.length > 5 && !blacklist.includes(w));
+
+  document.getElementById("info").innerHTML = "";
+
+  if(candidates.length === 0){
+    document.getElementById("info").innerText =
+      "No medicine detected clearly.";
+    return;
+  }
+
+  candidates.slice(0,4).forEach(med => fetchWiki(med));
+}
+
+
+async function fetchWiki(term){
+  const url =
+    `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(term)}`;
+
+  try{
+    const res = await fetch(url);
+    if(!res.ok) return;
+
+    const data = await res.json();
+    if(!data.extract) return;
+
+    parseMedicalText(term, data.extract);
+
+  }catch{
+    console.warn("Wiki failed for", term);
+  }
+}
+
+
+function parseMedicalText(name, text){
+  const lower = text.toLowerCase();
+
+  const usage = extractSentence(lower, ["used","treat","relief"]);
+  const side = extractSentence(lower, ["side effect","may cause","adverse"]);
+  const precaution = extractSentence(lower, ["avoid","warning","risk"]);
+
+  document.getElementById("info").innerHTML += `
+  <div class="medicine" style="
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:12px;
+    background:#f9fafb;
+  ">
+    <h4>💊 ${name.toUpperCase()}</h4>
+    <b>Usage:</b> ${usage || "Refer doctor"}<br><br>
+    <b>Side effects:</b> ${side || "Not clearly mentioned"}<br><br>
+    <b>Precautions:</b> ${precaution || "Consult healthcare professional"}
+    <br><br>
+    <small>Source: Wikipedia (educational only)</small>
+  </div>
+  `;
+}
+
+
+function extractSentence(text, keywords){
+  for(const key of keywords){
+    const index = text.indexOf(key);
+    if(index !== -1){
+      return text.substring(index, index+160)+"...";
+    }
+  }
+  return null;
+}
+
+/* ---------- MAP ---------- */
+let map;
+
+async function loadNearbyPharmacies(){
+  const mapDiv = document.getElementById("map");
+  mapDiv.style.display = "block";
+
+  // Initialize map **after** div is visible
+  if(!map){
+    map = L.map("map").setView([0,0], 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+  }
+
+  // Get user location
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(async pos=>{
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      map.setView([lat, lon], 13);
+      L.marker([lat, lon]).addTo(map).bindPopup("You are here");
+
+      // Fetch nearby pharmacies
+      const q = `[out:json];node["amenity"="pharmacy"](around:10000,${lat},${lon});out;`;
+      const res = await fetch("https://overpass-api.de/api/interpreter?data="+encodeURIComponent(q));
+      const data = await res.json();
+
+      data.elements.forEach(p=>{
+        L.marker([p.lat, p.lon])
+          .addTo(map)
+          .bindPopup(p.tags?.name || "Medical Store");
+      });
+    }, err=>{
+      alert("Could not get location: " + err.message);
+    });
+  }else{
+    alert("Geolocation not supported in your browser");
+  }
+}
+
+
+/* ---------- REMINDER ---------- */
+const modal = document.getElementById("reminderModal");
+const reminderBtn = document.getElementById("reminderBtn");
+
+reminderBtn.onclick = () => {
+  modal.classList.add("active"); // show modal
+}
+
+function closeReminder() {
+  modal.classList.remove("active"); // hide modal
+}
+
+
+let reminders=JSON.parse(localStorage.getItem("popupReminders")||"[]");
+
+function renderReminders(){
+  popupReminderList.innerHTML="";
+  reminders.forEach((r,i)=>{
+    const li=document.createElement("li");
+    li.textContent=`${r.name} at ${r.time}`;
+    const del=document.createElement("button");
+    del.textContent="❌";
+    del.onclick=()=>deleteReminder(i);
+    li.appendChild(del);
+    popupReminderList.appendChild(li);
+  });
+}
+
+function addReminder(){
+  const name=medNamePopup.value.trim();
+  const time=medTimePopup.value;
+  if(!name||!time) return alert("Fill all fields");
+  reminders.push({name,time});
+  localStorage.setItem("popupReminders",JSON.stringify(reminders));
+  renderReminders();
+}
+
+function deleteReminder(i){
+  reminders.splice(i,1);
+  localStorage.setItem("popupReminders",JSON.stringify(reminders));
+  renderReminders();
+}
+
+function addToGoogleCalendar(){
+  const name=medNamePopup.value.trim();
+  const time=medTimePopup.value;
+  if(!name||!time) return alert("Fill all fields");
+  const text=encodeURIComponent(`Take medicine ${name} at ${time}`);
+  window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}`,"_blank");
+}
+
+renderReminders();
+const toggleBtn = document.getElementById("darkModeToggle");
+
+
+
+function goBack() {
+    window.history.back();
+  }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".slide");
+  const prevBtn = document.querySelector(".arrow.left");
+  const nextBtn = document.querySelector(".arrow.right");
+
+  let currentSlide = 0;
+  let interval;
+
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove("active"));
+    slides[index].classList.add("active");
+  }
+
+  function startAutoSlide() {
+    interval = setInterval(() => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }, 12000);
+  }
+
+  function resetAutoSlide() {
+    clearInterval(interval);
+    startAutoSlide();
+  }
+
+  nextBtn.addEventListener("click", () => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+    resetAutoSlide();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+    resetAutoSlide();
+  });
+
+  // START SLIDER
+  showSlide(currentSlide);
+  startAutoSlide();
+});
+
+
+</script>
+
+</body>
+</html>
