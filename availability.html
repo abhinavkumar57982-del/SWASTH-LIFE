@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Availability</title>
+<!-- <link rel="stylesheet" href="style.css"> -->
+ <style>
+.container {
+  width: 800px;
+  margin: auto;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* GRID APPLIED HERE 👇 */
+.links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2351ac;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.link:hover {
+  transform: translateY(-5px);
+}
+
+.link img {
+  max-width: 140px;
+  height: auto;
+}
+@media (max-width: 600px) {
+  .links {
+    grid-template-columns: 1fr;
+  }
+}
+.container h1{
+    font-weight: 500;
+    font-size: 50px;
+}
+.back-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: white;
+  color: #ff5a7a;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.back-btn:hover {
+  background: #ffe4ea;
+  transform: translateX(-3px);
+}
+
+ </style>
+</head>
+<body>
+    <!-- GO BACK BUTTON -->
+<div class="back-btn" onclick="goBack()">
+  ← Back
+</div>
+<div class="container">
+  <h1>Medicine E-commerce Websites</h1>
+
+  <ul class="links">
+    <li>
+      <a class="link" href="https://www.1mg.com" target="_blank">
+        <img src="1mg logo.png" alt="1mg">
+      </a>
+    </li>
+
+    <li>
+      <a class="link" href="https://www.netmeds.com" target="_blank">
+        <img src="netmeds.png" alt="Netmeds">
+      </a>
+    </li>
+
+    <li>
+      <a class="link" href="https://www.pharmeasy.in" target="_blank">
+        <img src="pharmeasy.png" alt="PharmEasy">
+      </a>
+    </li>
+
+    <li>
+      <a class="link" href="https://www.apollo247.com" target="_blank">
+        <img src="apollo247.png" alt="Apollo 247">
+      </a>
+    </li>
+  </ul>
+</div>
+<script>
+    function goBack() {
+    window.history.back();
+  }
+</script>
+
+</body>
+</html>
