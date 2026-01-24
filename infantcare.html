@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Infant Care & Safety</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f6f9fc;
+      color: #333;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(to right, #ffb6c1, #ffd6e0);
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    /* FEATURE CARDS */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+      color: #ff5a7a;
+    }
+
+    /* SECTIONS */
+    section {
+      background: white;
+      margin: 30px;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    section h2 {
+      margin-bottom: 20px;
+      color: #ff5a7a;
+      text-align: center;
+    }
+
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    table th {
+      background: #ffe4ea;
+    }
+
+    /* FORMS */
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #ff5a7a;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e64967;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Q & A */
+    .qa {
+      margin-bottom: 15px;
+    }
+
+    .qa h4 {
+      color: #ff5a7a;
+    }
+
+    /* EMERGENCY */
+    .emergency {
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .emergency span {
+      display: block;
+      margin: 10px 0;
+      font-size: 22px;
+      font-weight: bold;
+      color: red;
+    }
+    .back-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: white;
+  color: #ff5a7a;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.back-btn:hover {
+  background: #ffe4ea;
+  transform: translateX(-3px);
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- GO BACK BUTTON -->
+<div class="back-btn" onclick="goBack()">
+  ← Back
+</div>
+
+
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <h1>Infant Care & Safety</h1>
+    <p>Ensuring healthy growth, nutrition & emergency support for your baby</p>
+  </div>
+
+  <!-- QUICK FEATURE CARDS -->
+  <div class="features">
+    <div class="feature-card">
+      <h3>Growth</h3>
+      <p>Track weight & development milestones</p>
+    </div>
+    <div class="feature-card">
+      <h3>Vaccination</h3>
+      <p>Never miss important vaccines</p>
+    </div>
+    <div class="feature-card">
+      <h3>Feeding</h3>
+      <p>Age-wise nutrition guidance</p>
+    </div>
+    <div class="feature-card">
+      <h3>Emergency</h3>
+      <p>Immediate help & warning signs</p>
+    </div>
+  </div>
+
+  <!-- VACCINATION SCHEDULE -->
+  <section>
+    <h2>Vaccination Schedule</h2>
+    <table>
+      <tr>
+        <th>Age</th>
+        <th>Vaccine</th>
+      </tr>
+      <tr>
+        <td>At Birth</td>
+        <td>BCG, OPV, Hepatitis B</td>
+      </tr>
+      <tr>
+        <td>6 Weeks</td>
+        <td>DTP, IPV, Hep B, Hib</td>
+      </tr>
+      <tr>
+        <td>10 Weeks</td>
+        <td>DTP, IPV, Hib</td>
+      </tr>
+      <tr>
+        <td>14 Weeks</td>
+        <td>DTP, IPV, Hib</td>
+      </tr>
+      <tr>
+        <td>9 Months</td>
+        <td>Measles, Rubella</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- GROWTH TRACKER -->
+  <section>
+    <h2>Growth Tracker</h2>
+
+    <label>Age (months)</label>
+    <input type="number" id="age">
+
+    <label>Weight (kg)</label>
+    <input type="number" id="weight">
+
+    <button onclick="checkGrowth()">Check Growth</button>
+
+    <div class="result" id="growthResult"></div>
+  </section>
+
+  <!-- FEEDING GUIDE -->
+  <section>
+    <h2>Feeding Guide</h2>
+    <ul>
+      <li><b>0 – 6 months:</b> Exclusive breastfeeding</li>
+      <li><b>6 – 8 months:</b> Mashed fruits, cereals</li>
+      <li><b>9 – 12 months:</b> Soft solid foods</li>
+      <li><b>1+ year:</b> Family food (less spice)</li>
+    </ul>
+  </section>
+
+  <!-- Q & A -->
+  <section>
+    <h2>Common Questions</h2>
+
+    <div class="qa">
+      <h4>How much should my baby sleep?</h4>
+      <p>Newborns sleep 14–17 hours a day.</p>
+    </div>
+
+    <div class="qa">
+      <h4>Is fever after vaccination normal?</h4>
+      <p>Yes, mild fever is common. Consult a doctor if severe.</p>
+    </div>
+
+    <div class="qa">
+      <h4>Can I give medicine without prescription?</h4>
+      <p>No. Always consult a pediatrician.</p>
+    </div>
+  </section>
+
+  <!-- EMERGENCY HELPLINE -->
+  <section class="emergency">
+    <h2>Emergency Helpline</h2>
+    <span>🚑 Ambulance: 108</span>
+    <span>👶 Child Helpline: 1098</span>
+    <p>If baby has breathing trouble, seizures, or continuous crying – seek help immediately.</p>
+  </section>
+
+  <script>
+    function checkGrowth() {
+      const age = document.getElementById("age").value;
+      const weight = document.getElementById("weight").value;
+      const result = document.getElementById("growthResult");
+
+      if (!age || !weight) {
+        result.innerText = "Please enter all details.";
+        return;
+      }
+
+      if (weight < 5) {
+        result.innerText = "Underweight – consult pediatrician.";
+      } else if (weight >= 5 && weight <= 10) {
+        result.innerText = "Normal growth 👍";
+      } else {
+        result.innerText = "Above average – consult doctor.";
+      }
+    }
+    
+  function goBack() {
+    window.history.back();
+  }
+
+
+  </script>
+
+</body>
+</html>
