@@ -224,14 +224,21 @@ padding:10px;
 border-top:1px solid #ddd;
 gap:6px;
 ">
-    <input id="userInput" placeholder="Type your message..."
-      style="flex:1;padding:10px;border-radius:20px;border:1px solid #ccc;outline:none;"
-      onkeypress="handleKeyPress(event)">
-    <button id="sendBtn" onclick="sendMessage()"
-      style="padding:10px 16px;border:none;border-radius:20px;background:#667eea;color:white;">
-      Send
-    </button>
-  </div>
+  <input id="userInput" placeholder="Type or speak..."
+    style="flex:1;padding:10px;border-radius:20px;border:1px solid #ccc;outline:none;"
+    onkeypress="handleKeyPress(event)">
+
+  <button onclick="startBotMic()"
+    style="padding:10px 14px;border:none;border-radius:50%;background:#10b981;color:white;">
+    🎤
+  </button>
+
+  <button id="sendBtn" onclick="sendMessage()"
+    style="padding:10px 16px;border:none;border-radius:20px;background:#667eea;color:white;">
+    Send
+  </button>
+</div>
+
 
 </div>
 
@@ -572,6 +579,34 @@ function escapeHtml(t){
   const d=document.createElement("div");
   d.textContent=t;
   return d.innerHTML;
+}
+
+
+/* ---------- GEMINI BOT VOICE INPUT ---------- */
+function startBotMic(){
+  if(!('webkitSpeechRecognition' in window)){
+    alert("Voice recognition not supported in this browser");
+    return;
+  }
+
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-US";
+  recognition.continuous = false;
+  recognition.interimResults = false;
+
+  recognition.start();
+
+  addMsg("🎧 Listening...","bot");
+
+  recognition.onresult = (event)=>{
+    const voiceText = event.results[0][0].transcript;
+    document.getElementById("userInput").value = voiceText;
+    sendMessage();
+  };
+
+  recognition.onerror = ()=>{
+    addMsg("❌ Voice recognition failed","bot");
+  };
 }
 
 
