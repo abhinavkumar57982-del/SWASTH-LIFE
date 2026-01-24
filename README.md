@@ -151,7 +151,7 @@ It does **not replace professional medical advice**. Always consult a qualified 
 ---
 
 ## 👨‍💻 Built By
-**Student Innovators**  
+**BINARY BRAINS**  
 Hackathon Project – 2026 🚀
 
 
