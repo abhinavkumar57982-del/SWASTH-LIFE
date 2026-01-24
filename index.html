@@ -1,103 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>SWASTH LIFE</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <meta charset="UTF-8">
+  <title>SWASTH LIFE</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
+
 <body>
   <!-- HERO IMAGE -->
-<div class="hero">
-  <img src="image.png" alt="Medical Assistant Banner">
-  
+  <div class="hero">
+    <img src="image.png" alt="Medical Assistant Banner">
 
-</div>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-left">
-    <a href="index.html" >Home</a>
-    <a href="male.html">Male</a>
-    <a href="female.html">Female</a>
-    <a href="infantcare.html">Infant Care</a>
-    <a href="mentalhealth.html">Mental Health</a>
   </div>
 
-  <div class="nav-right">
-    <input 
-      id="navInput" 
-      type="text" 
-      placeholder="Search or speak..."
-    >
-    <button onclick="navigateText()">Go</button>
-    <button onclick="startNavMic()">🎤</button>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+      <a href="male.html">Male</a>
+      <a href="female.html">Female</a>
+      <a href="infantcare.html">Infant Care</a>
+      <a href="mentalhealth.html">Mental Health</a>
+    </div>
+
+    <div class="nav-right">
+      <input id="navInput" type="text" placeholder="Search or speak...">
+      <button onclick="navigateText()">Go</button>
+      <button onclick="startNavMic()">🎤</button>
+    </div>
+  </nav>
+
+  <p id="navStatus" class="nav-status"></p>
+
+  <!-- IMAGE SLIDER -->
+  <div class="slider">
+    <img class="slide active" src="WhatsApp Image 2026-01-13 at 1.02.20 AM.jpeg">
+    <img class="slide" src="WhatsApp Image 2026-01-13 at 1.02.39 AM.jpeg">
+    <img class="slide" src="WhatsApp Image 2026-01-13 at 1.03.20 AM.jpeg">
+    <img class="slide" src="WhatsApp Image 2026-01-13 at 1.03.55 AM.jpeg">
+
+    <!-- Arrows -->
+    <button class="arrow left">&#10094;</button>
+    <button class="arrow right">&#10095;</button>
   </div>
-</nav>
+  <!-- PROVIDING SECTION -->
 
-<p id="navStatus" class="nav-status"></p>
+  <section class="services">
+    <section class="teams">
+      <div class="team">
+        <div id="teamname">
+          <h3>SWASTH LIFE </h3>
+        </div>
+      </div>
+    </section>
 
-<!-- IMAGE SLIDER -->
-<div class="slider">
-  <img class="slide active" src="WhatsApp Image 2026-01-13 at 1.02.20 AM.jpeg">
-  <img class="slide" src="WhatsApp Image 2026-01-13 at 1.02.39 AM.jpeg">
-  <img class="slide" src="WhatsApp Image 2026-01-13 at 1.03.20 AM.jpeg">
-  <img class="slide" src="WhatsApp Image 2026-01-13 at 1.03.55 AM.jpeg">
-
-  <!-- Arrows -->
-  <button class="arrow left">&#10094;</button>
-  <button class="arrow right">&#10095;</button>
-</div>
-<!-- PROVIDING SECTION -->
- 
-<section class="services">
-   <section class="teams">
-    <div class="team">
-    <div id="teamname">
-    <h3>SWASTH LIFE </h3>
-   </div>
-   </div>
-   </section>
-  
-  <h2>  We provide smart, accessible healthcare support for every stage of life. </h2>
-  <div class="view-features-box" onclick="document.querySelector('.card-container').scrollIntoView({behavior:'smooth'})">
-  View Features
-</div>
-
-  
-
-  <div class="card-container">
-    <div class="service-card" onclick="location.href='male.html'">
-      <img src="male.png" alt="Male Care">
-      <h3>Male Care</h3>
-      <p>Health guidance and medicine support for men</p>
+    <h2> We provide smart, accessible healthcare support for every stage of life. </h2>
+    <div class="view-features-box"
+      onclick="document.querySelector('.card-container').scrollIntoView({behavior:'smooth'})">
+      View Features
     </div>
 
-    <div class="service-card" onclick="location.href='female.html'">
-      <img src="female.png" alt="Female Care">
-      <h3>Female Care</h3>
-      <p>Women health, pregnancy & wellness support</p>
+
+
+    <div class="card-container">
+      <div class="service-card" onclick="location.href='male.html'">
+        <img src="male.png" alt="Male Care">
+        <h3>Male Care</h3>
+        <p>Health guidance and medicine support for men</p>
+      </div>
+
+      <div class="service-card" onclick="location.href='female.html'">
+        <img src="female.png" alt="Female Care">
+        <h3>Female Care</h3>
+        <p>Women health, pregnancy & wellness support</p>
+      </div>
+
+      <div class="service-card" onclick="location.href='infantcare.html'">
+        <img src="infantcare.png" alt="Infant Care">
+        <h3>Infant Care</h3>
+        <p>Baby care, nutrition and safety guidance</p>
+      </div>
+
+      <div class="service-card" onclick="location.href='mentalhealth.html'">
+        <img src="mentalhealth.png" alt="Mental Health">
+        <h3>Mental Health</h3>
+        <p>Mental wellness and emotional support</p>
+      </div>
     </div>
-
-    <div class="service-card" onclick="location.href='infantcare.html'">
-      <img src="infantcare.png" alt="Infant Care">
-      <h3>Infant Care</h3>
-      <p>Baby care, nutrition and safety guidance</p>
-    </div>
-
-    <div class="service-card" onclick="location.href='mentalhealth.html'">
-      <img src="mentalhealth.png" alt="Mental Health">
-      <h3>Mental Health</h3>
-      <p>Mental wellness and emotional support</p>
-    </div>
-  </div>
-</section>
+  </section>
 
 
 
 
 
-<!-- NAVIGATION SEARCH BAR
+  <!-- NAVIGATION SEARCH BAR
 <div class="container">
   <h2>Quick Navigation</h2>
 
@@ -113,60 +112,60 @@
   <p id="navStatus" style="margin-top:8px;color:#2563eb;"></p>
 </div> -->
 
-<section class="prescription-section">
+  <section class="prescription-section">
 
-  <h2>Prescription Uploader</h2>
-  <p class="subtitle">
-    Upload your prescription and get medicine guidance instantly
-  </p>
+    <h2>Prescription Uploader</h2>
+    <p class="subtitle">
+      Upload your prescription and get medicine guidance instantly
+    </p>
 
-  <div class="prescription-layout">
-  
-    
+    <div class="prescription-layout">
 
-    <!-- LEFT FEATURE CARD -->
-    <div class="feature-card">
-      <img src="ocr image.png" id="leftimage" alt="OCR Feature">
-      <div class="feature-content">
-        <h3>Smart OCR</h3>
-        <p>
-          Extracts medicine names from prescriptions automatically
-          with high accuracy.
-        </p>
+
+
+      <!-- LEFT FEATURE CARD -->
+      <div class="feature-card">
+        <img src="ocr image.png" id="leftimage" alt="OCR Feature">
+        <div class="feature-content">
+          <h3>Smart OCR</h3>
+          <p>
+            Extracts medicine names from prescriptions automatically
+            with high accuracy.
+          </p>
+        </div>
       </div>
-    </div>
 
-    <!-- CENTER UPLOADER -->
-    <div class="upload-card">
-      <img src="uploader.png" id="upload-icon" alt="Upload">
-      <h3>Upload Prescription</h3>
+      <!-- CENTER UPLOADER -->
+      <div class="upload-card">
+        <img src="uploader.png" id="upload-icon" alt="Upload">
+        <h3>Upload Prescription</h3>
 
-      <!-- <input type="file" id="imageInput" accept="image/*">
+        <!-- <input type="file" id="imageInput" accept="image/*">
       <button onclick="extractText()">Extract Text</button> -->
 
-      <p id="ocrStatus"></p>
-      <button id="nextBtn" onclick="goToResult()" enabled>
-        Continue →
-      </button>
-    </div>
-
-    <!-- RIGHT FEATURE CARD -->
-    <div class="feature-card">
-      <img src="guidence.png" id="rightimage" alt="Medicine Info">
-      <div class="feature-content">
-        <h3>Medicine Guidance</h3>
-        <p>
-          Know usage, dosage, side effects and nearby availability
-          instantly.
-        </p>
+        <p id="ocrStatus"></p>
+        <button id="nextBtn" onclick="goToResult()" enabled>
+          Continue →
+        </button>
       </div>
+
+      <!-- RIGHT FEATURE CARD -->
+      <div class="feature-card">
+        <img src="guidence.png" id="rightimage" alt="Medicine Info">
+        <div class="feature-content">
+          <h3>Medicine Guidance</h3>
+          <p>
+            Know usage, dosage, side effects and nearby availability
+            instantly.
+          </p>
+        </div>
+      </div>
+
     </div>
+  </section>
 
-  </div>
-</section>
-
-<!-- FLOATING CHAT BOT ICON -->
-<button id="chatToggle" style="
+  <!-- FLOATING CHAT BOT ICON -->
+  <button id="chatToggle" style="
 position:fixed;
 bottom:20px;
 right:20px;
@@ -181,11 +180,11 @@ font-size:26px;
 cursor:pointer;
 box-shadow:0 8px 20px rgba(0,0,0,0.3);
 ">
-💬
-</button>
+    💬
+  </button>
 
-<!-- CHAT BOT POPUP -->
-<div id="chatPopup" style="
+  <!-- CHAT BOT POPUP -->
+  <div id="chatPopup" style="
 display:none;
 position:fixed;
 bottom:90px;
@@ -201,378 +200,378 @@ flex-direction:column;
 ">
 
 
-  <div style="
+    <div style="
 background:linear-gradient(135deg,#667eea,#764ba2);
 color:white;
 padding:14px;
 text-align:center;
 font-weight:600;
 ">
-✨ Chat Assistant
-  </div>
+      ✨ Chat Assistant
+    </div>
 
-  <div id="messages" style="
+    <div id="messages" style="
 flex:1;
 overflow-y:auto;
 padding:12px;
 background:#f8f9fa;
 "></div>
 
-  <div style="
+    <div style="
 display:flex;
 padding:10px;
 border-top:1px solid #ddd;
 gap:6px;
 ">
-    <input id="userInput" placeholder="Type your message..."
-      style="flex:1;padding:10px;border-radius:20px;border:1px solid #ccc;outline:none;"
-      onkeypress="handleKeyPress(event)">
-    <button id="sendBtn" onclick="sendMessage()"
-      style="padding:10px 16px;border:none;border-radius:20px;background:#667eea;color:white;">
-      Send
-    </button>
-  </div>
-
-</div>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-container">
-
-    <!-- TEAM INFO -->
-    <div class="footer-section">
-      <img src="teamlogo.jpeg" class="footer-logo" alt="Team Logo">
-      <h3>BINARY BRAINS</h3>
-      <p>
-        A smart healthcare prototype designed to assist users with
-        prescription understanding, medicine guidance, and quick health navigation.
-      </p>
-    </div>
-
-    <!-- TEAM MEMBERS -->
-    <div class="footer-section">
-      <h4>Team Members</h4>
-      <ul>
-        <li>Abhinav Kumar</li>
-        <li>Himanshu Pandey</li>
-        <li>Rounak Raj Pandey</li>
-        <li>Anushk Singh</li>
-      </ul>
-    </div>
-
-    <!-- IDEA -->
-    <div class="footer-section">
-      <h4>Our Idea</h4>
-      <p>
-        To simplify healthcare access by using OCR, local intelligence,
-        and smart navigation — helping users understand prescriptions,
-        find medicines, and get timely reminders.
-      </p>
-    </div>
-
-    <!-- QUICK LINKS -->
-    <div class="footer-section">
-      <h4>Quick Links</h4>
-      <a href="index.html">Home</a>
-      <a href="male.html">Male</a>
-      <a href="female.html">Female</a>
-      <a href="infantcare.html">Infant Care</a>
-      <a href="mentalhealth.html">Mental Health</a>
+      <input id="userInput" placeholder="Type your message..."
+        style="flex:1;padding:10px;border-radius:20px;border:1px solid #ccc;outline:none;"
+        onkeypress="handleKeyPress(event)">
+      <button id="sendBtn" onclick="sendMessage()"
+        style="padding:10px 16px;border:none;border-radius:20px;background:#667eea;color:white;">
+        Send
+      </button>
     </div>
 
   </div>
 
-  <div class="footer-bottom">
-    © 2026 Binary Brains | Built for Hackathon Prototype
-  </div>
-</footer>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+
+      <!-- TEAM INFO -->
+      <div class="footer-section">
+        <img src="teamlogo.jpeg" class="footer-logo" alt="Team Logo">
+        <h3>BINARY BRAINS</h3>
+        <p>
+          A smart healthcare prototype designed to assist users with
+          prescription understanding, medicine guidance, and quick health navigation.
+        </p>
+      </div>
+
+      <!-- TEAM MEMBERS -->
+      <div class="footer-section">
+        <h4>Team Members</h4>
+        <ul>
+          <li>Abhinav Kumar</li>
+          <li>Himanshu Pandey</li>
+          <li>Rounak Raj Pandey</li>
+          <li>Anushk Singh</li>
+        </ul>
+      </div>
+
+      <!-- IDEA -->
+      <div class="footer-section">
+        <h4>Our Idea</h4>
+        <p>
+          To simplify healthcare access by using OCR, local intelligence,
+          and smart navigation — helping users understand prescriptions,
+          find medicines, and get timely reminders.
+        </p>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="male.html">Male</a>
+        <a href="female.html">Female</a>
+        <a href="infantcare.html">Infant Care</a>
+        <a href="mentalhealth.html">Mental Health</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Binary Brains | Built for Hackathon Prototype
+    </div>
+  </footer>
 
 
-<script>
-/* ---------- OCR ---------- */
+  <script>
+    /* ---------- OCR ---------- */
 
 
-function extractText(){
-  const file = document.getElementById("imageInput").files[0];
-  if(!file){
-    alert("Select an image");
-    return;
-  }
+    function extractText() {
+      const file = document.getElementById("imageInput").files[0];
+      if (!file) {
+        alert("Select an image");
+        return;
+      }
 
-  document.getElementById("ocrStatus").innerText = "Reading prescription... ⏳";
+      document.getElementById("ocrStatus").innerText = "Reading prescription... ⏳";
 
-  const fileName = file.name.toLowerCase();
+      const fileName = file.name.toLowerCase();
 
-  /* ---------- MOCK IMAGE MATCH ---------- */
-  // if(fileName.includes("image1")){
-  //   const text = "Paracetamol, Aspirin";
-  //   localStorage.setItem("extractedText", text);
-  //   document.getElementById("ocrStatus").innerText = "Prescription captured ✅";
-  //   document.getElementById("nextBtn").disabled = false;
-  //   return;
-  // }
+      /* ---------- MOCK IMAGE MATCH ---------- */
+      // if(fileName.includes("image1")){
+      //   const text = "Paracetamol, Aspirin";
+      //   localStorage.setItem("extractedText", text);
+      //   document.getElementById("ocrStatus").innerText = "Prescription captured ✅";
+      //   document.getElementById("nextBtn").disabled = false;
+      //   return;
+      // }
 
-  // if(fileName.includes("image2")){
-  //   const text = "Pain killer";
-  //   localStorage.setItem("extractedText", text);
-  //   document.getElementById("ocrStatus").innerText = "Prescription captured ✅";
-  //   document.getElementById("nextBtn").disabled = false;
-  //   return;
-  // }
+      // if(fileName.includes("image2")){
+      //   const text = "Pain killer";
+      //   localStorage.setItem("extractedText", text);
+      //   document.getElementById("ocrStatus").innerText = "Prescription captured ✅";
+      //   document.getElementById("nextBtn").disabled = false;
+      //   return;
+      // }
 
-  /* ---------- REAL OCR ---------- */
-  Tesseract.recognize(file, 'eng')
-    .then(({ data: { text } }) => {
-      localStorage.setItem("extractedText", text || "Unreadable text");
-      document.getElementById("ocrStatus").innerText = "Prescription captured ✅";
-      document.getElementById("nextBtn").disabled = false;
-    })
-    .catch(() => {
-      document.getElementById("ocrStatus").innerText = "OCR failed ❌";
+      /* ---------- REAL OCR ---------- */
+      Tesseract.recognize(file, 'eng')
+        .then(({ data: { text } }) => {
+          localStorage.setItem("extractedText", text || "Unreadable text");
+          document.getElementById("ocrStatus").innerText = "Prescription captured ✅";
+          document.getElementById("nextBtn").disabled = false;
+        })
+        .catch(() => {
+          document.getElementById("ocrStatus").innerText = "OCR failed ❌";
+        });
+    }
+
+    function goToResult() {
+      window.location.href = "result.html";
+    }
+
+
+
+    /* ---------- BOT ---------- */
+    const botBox = document.getElementById("botBox");
+    const botToggle = document.getElementById("botToggle");
+    const botMessages = document.getElementById("botMessages");
+    const botInput = document.getElementById("botInput");
+
+    botToggle.onclick = () => botBox.style.display =
+      botBox.style.display === "none" ? "block" : "none";
+
+    function botSay(t) {
+      botMessages.innerHTML += `<div><b>Bot:</b> ${t}</div>`;
+      botMessages.scrollTop = botMessages.scrollHeight;
+    }
+    function userSay(t) {
+      botMessages.innerHTML += `<div><b>You:</b> ${t}</div>`;
+    }
+
+    /* ---------- REAL MEDICINE DATA ---------- */
+    async function fetchMedicineInfo(query) {
+      try {
+        const search = await fetch(
+          `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*`
+        );
+        const sData = await search.json();
+        if (!sData.query.search.length) return "No data found.";
+
+        const title = sData.query.search[0].title;
+        const res = await fetch(
+          `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`
+        );
+        const data = await res.json();
+        return data.extract || "No details available.";
+      } catch {
+        return "Failed to fetch information.";
+      }
+    }
+
+    /* ---------- BOT HANDLER ---------- */
+    async function handleBot() {
+      const text = botInput.value.trim();
+      if (!text) return;
+
+      userSay(text);
+      botInput.value = "";
+      const t = text.toLowerCase();
+
+      if (t.includes("male")) return location.href = "male.html";
+      if (t.includes("female")) return location.href = "female.html";
+      if (t.includes("infant")) return location.href = "infantcare.html";
+      if (t.includes("mental")) return location.href = "mentalhealth.html";
+      if (t.includes("nearby") || t.includes("availability")) return location.href = "result.html";
+
+      botSay("Searching medical data 🔍");
+      const info = await fetchMedicineInfo(text);
+      botSay(info);
+      speak(info);
+    }
+
+    /* ---------- TEXT TO SPEECH ---------- */
+    let currentUtterance = null;
+
+    function speak(text) {
+      stopBotVoice(); // stop previous voice
+      currentUtterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(currentUtterance);
+    }
+
+    /* ---------- STOP VOICE ---------- */
+    function stopBotVoice() {
+      if (speechSynthesis.speaking || speechSynthesis.pending) {
+        speechSynthesis.cancel();
+      }
+    }
+  </script>
+
+  <script>
+    /* ---------- TEXT NAVIGATION ---------- */
+    function navigateText() {
+      handleNavigation(document.getElementById("navInput").value.toLowerCase());
+    }
+
+    /* ---------- MIC NAVIGATION ---------- */
+    function startNavMic() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Speech recognition not supported");
+        return;
+      }
+
+      const recog = new webkitSpeechRecognition();
+      recog.lang = "en-US";
+      recog.start();
+      navStatus.innerText = "Listening... 🎧";
+
+      recog.onresult = (e) => {
+        const text = e.results[0][0].transcript.toLowerCase();
+        navInput.value = text;
+        navStatus.innerText = "Heard: " + text;
+        handleNavigation(text);
+      };
+    }
+
+    /* ---------- NAVIGATION LOGIC ---------- */
+    function handleNavigation(text) {
+      if (text.includes("male")) return location.href = "male.html";
+      if (text.includes("female")) return location.href = "female.html";
+      if (text.includes("infant")) return location.href = "infantcare.html";
+      if (text.includes("mental")) return location.href = "mentalhealth.html";
+      if (text.includes("result") || text.includes("nearby")) return location.href = "result.html";
+      if (text.includes("availability")) return location.href = "availability.html";
+      if (text.includes("result") || text.includes("reminder")) return location.href = "result.html";
+      if (text.includes("result") || text.includes("uploader")) return location.href = "result.html";
+
+      navStatus.innerText = "No matching section found ❌";
+    }
+
+
+    const slides = document.querySelectorAll(".slide");
+    const prevBtn = document.querySelector(".arrow.left");
+    const nextBtn = document.querySelector(".arrow.right");
+
+    let currentSlide = 0;
+    let interval;
+
+    /* Show slide */
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove("active"));
+      slides[index].classList.add("active");
+    }
+
+    /* Auto slide */
+    function startAutoSlide() {
+      interval = setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }, 12000); // 12 sec
+    }
+
+    /* Reset timer after manual click */
+    function resetAutoSlide() {
+      clearInterval(interval);
+      startAutoSlide();
+    }
+
+    /* Next */
+    nextBtn.addEventListener("click", () => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+      resetAutoSlide();
     });
-}
 
-function goToResult(){
-  window.location.href = "result.html";
-}
+    /* Previous */
+    prevBtn.addEventListener("click", () => {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+      resetAutoSlide();
+    });
 
+    startAutoSlide();
+    const toggleBtn = document.getElementById("darkModeToggle");
 
-
-/* ---------- BOT ---------- */
-const botBox=document.getElementById("botBox");
-const botToggle=document.getElementById("botToggle");
-const botMessages=document.getElementById("botMessages");
-const botInput=document.getElementById("botInput");
-
-botToggle.onclick=()=>botBox.style.display=
-botBox.style.display==="none"?"block":"none";
-
-function botSay(t){
-  botMessages.innerHTML+=`<div><b>Bot:</b> ${t}</div>`;
-  botMessages.scrollTop=botMessages.scrollHeight;
-}
-function userSay(t){
-  botMessages.innerHTML+=`<div><b>You:</b> ${t}</div>`;
-}
-
-/* ---------- REAL MEDICINE DATA ---------- */
-async function fetchMedicineInfo(query){
-  try{
-    const search=await fetch(
-      `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*`
-    );
-    const sData=await search.json();
-    if(!sData.query.search.length) return "No data found.";
-
-    const title=sData.query.search[0].title;
-    const res=await fetch(
-      `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`
-    );
-    const data=await res.json();
-    return data.extract || "No details available.";
-  }catch{
-    return "Failed to fetch information.";
-  }
-}
-
-/* ---------- BOT HANDLER ---------- */
-async function handleBot(){
-  const text=botInput.value.trim();
-  if(!text) return;
-
-  userSay(text);
-  botInput.value="";
-  const t=text.toLowerCase();
-
-if(t.includes("male")) return location.href="male.html";
-if(t.includes("female")) return location.href="female.html";
-if(t.includes("infant")) return location.href="infantcare.html";
-if(t.includes("mental")) return location.href="mentalhealth.html";
-if(t.includes("nearby") || t.includes("availability")) return location.href="result.html";
-
-  botSay("Searching medical data 🔍");
-  const info=await fetchMedicineInfo(text);
-  botSay(info);
-  speak(info);
-}
-
-/* ---------- TEXT TO SPEECH ---------- */
-let currentUtterance = null;
-
-function speak(text){
-  stopBotVoice(); // stop previous voice
-  currentUtterance = new SpeechSynthesisUtterance(text);
-  speechSynthesis.speak(currentUtterance);
-}
-
-/* ---------- STOP VOICE ---------- */
-function stopBotVoice(){
-  if(speechSynthesis.speaking || speechSynthesis.pending){
-    speechSynthesis.cancel();
-  }
-}
-</script>
-
-<script>
-/* ---------- TEXT NAVIGATION ---------- */
-function navigateText(){
-  handleNavigation(document.getElementById("navInput").value.toLowerCase());
-}
-
-/* ---------- MIC NAVIGATION ---------- */
-function startNavMic(){
-  if(!('webkitSpeechRecognition' in window)){
-    alert("Speech recognition not supported");
-    return;
-  }
-
-  const recog = new webkitSpeechRecognition();
-  recog.lang = "en-US";
-  recog.start();
-  navStatus.innerText = "Listening... 🎧";
-
-  recog.onresult = (e)=>{
-    const text = e.results[0][0].transcript.toLowerCase();
-    navInput.value = text;
-    navStatus.innerText = "Heard: " + text;
-    handleNavigation(text);
-  };
-}
-
-/* ---------- NAVIGATION LOGIC ---------- */
-function handleNavigation(text){
-  if(text.includes("male")) return location.href="male.html";
-  if(text.includes("female")) return location.href="female.html";
-  if(text.includes("infant")) return location.href="infantcare.html";
-  if(text.includes("mental")) return location.href="mentalhealth.html";
-  if(text.includes("result") || text.includes("nearby")) return location.href="result.html";
-  if(text.includes("availability")) return location.href="availability.html";
-  if(text.includes("result") || text.includes("reminder")) return location.href="result.html";
-  if(text.includes("result") || text.includes("uploader")) return location.href="result.html";
-
-  navStatus.innerText = "No matching section found ❌";
-}
+    // Load preference from localStorage
+    if (localStorage.getItem("darkMode") === "enabled") {
+      document.body.classList.add("dark-mode");
+      toggleBtn.textContent = "☀️ Light Mode";
+    }
 
 
-const slides = document.querySelectorAll(".slide");
-const prevBtn = document.querySelector(".arrow.left");
-const nextBtn = document.querySelector(".arrow.right");
+    const API_KEY = "AIzaSyCVknpq2CUv-izcuTRGzGBaF1iCGNcEF4c";
 
-let currentSlide = 0;
-let interval;
+    const chatToggle = document.getElementById("chatToggle");
+    const chatPopup = document.getElementById("chatPopup");
+    const messages = document.getElementById("messages");
 
-/* Show slide */
-function showSlide(index) {
-  slides.forEach(slide => slide.classList.remove("active"));
-  slides[index].classList.add("active");
-}
+    chatToggle.onclick = () => {
+      chatPopup.style.display =
+        chatPopup.style.display === "none" ? "flex" : "none";
+    };
 
-/* Auto slide */
-function startAutoSlide() {
-  interval = setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }, 12000); // 12 sec
-}
+    function handleKeyPress(e) {
+      if (e.key === "Enter") sendMessage();
+    }
 
-/* Reset timer after manual click */
-function resetAutoSlide() {
-  clearInterval(interval);
-  startAutoSlide();
-}
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const btn = document.getElementById("sendBtn");
+      if (!input.value.trim()) return;
 
-/* Next */
-nextBtn.addEventListener("click", () => {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
-  resetAutoSlide();
-});
+      addMsg(input.value, "user");
+      const text = input.value;
+      input.value = "";
+      btn.disabled = true;
 
-/* Previous */
-prevBtn.addEventListener("click", () => {
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  showSlide(currentSlide);
-  resetAutoSlide();
-});
-
-startAutoSlide();
-const toggleBtn = document.getElementById("darkModeToggle");
-
-// Load preference from localStorage
-if(localStorage.getItem("darkMode") === "enabled"){
-  document.body.classList.add("dark-mode");
-  toggleBtn.textContent = "☀️ Light Mode";
-}
-
-
-const API_KEY = "AIzaSyCVknpq2CUv-izcuTRGzGBaF1iCGNcEF4c";
-
-const chatToggle = document.getElementById("chatToggle");
-const chatPopup  = document.getElementById("chatPopup");
-const messages   = document.getElementById("messages");
-
-chatToggle.onclick = () => {
-  chatPopup.style.display =
-    chatPopup.style.display === "none" ? "flex" : "none";
-};
-
-function handleKeyPress(e){
-  if(e.key==="Enter") sendMessage();
-}
-
-async function sendMessage(){
-  const input=document.getElementById("userInput");
-  const btn=document.getElementById("sendBtn");
-  if(!input.value.trim()) return;
-
-  addMsg(input.value,"user");
-  const text=input.value;
-  input.value="";
-  btn.disabled=true;
-
-  const typing=document.createElement("div");
-  typing.className="bot-message";
-  typing.innerHTML=`<div class="bubble typing">
+      const typing = document.createElement("div");
+      typing.className = "bot-message";
+      typing.innerHTML = `<div class="bubble typing">
     <span></span><span></span><span></span>
   </div>`;
-  messages.appendChild(typing);
-  messages.scrollTop=messages.scrollHeight;
+      messages.appendChild(typing);
+      messages.scrollTop = messages.scrollHeight;
 
-  try{
-    const res=await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
-      {
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body:JSON.stringify({
-          contents:[{ parts:[{ text:text }] }]
-        })
+      try {
+        const res = await fetch(
+          `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: text }] }]
+            })
+          }
+        );
+        const data = await res.json();
+        typing.remove();
+        addMsg(data.candidates[0].content.parts[0].text, "bot");
+      } catch {
+        typing.remove();
+        addMsg("Network error ❌", "bot");
+      } finally {
+        btn.disabled = false;
       }
-    );
-    const data=await res.json();
-    typing.remove();
-    addMsg(data.candidates[0].content.parts[0].text,"bot");
-  }catch{
-    typing.remove();
-    addMsg("Network error ❌","bot");
-  }finally{
-    btn.disabled=false;
-  }
-}
+    }
 
-function addMsg(text,type){
-  const div=document.createElement("div");
-  div.className=`message ${type}-message`;
-  div.innerHTML=`<div class="bubble">${escapeHtml(text)}</div>`;
-  messages.appendChild(div);
-  messages.scrollTop=messages.scrollHeight;
-}
+    function addMsg(text, type) {
+      const div = document.createElement("div");
+      div.className = `message ${type}-message`;
+      div.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
 
-function escapeHtml(t){
-  const d=document.createElement("div");
-  d.textContent=t;
-  return d.innerHTML;
-}
+    function escapeHtml(t) {
+      const d = document.createElement("div");
+      d.textContent = t;
+      return d.innerHTML;
+    }
 
 
 
@@ -581,8 +580,9 @@ function escapeHtml(t){
 
 
 
-</script>
+  </script>
 
 
 </body>
+
 </html>
