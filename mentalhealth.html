@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mental Health Support</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f0f9ff;
+  color:#111;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  font-size:1.6rem;
+  background:none;
+  border:none;
+  color:#2563eb;
+  cursor:pointer;
+  margin:15px;
+}
+
+/* HERO */
+.hero{
+  height:230px;
+  background:linear-gradient(rgba(44, 13, 155, 0.4),rgba(204, 24, 24, 0.4)),
+  url("mental.jpg") center/cover no-repeat;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  text-align:center;
+  /* border-radius:20px; */
+  margin:10px;
+}
+.hero h1{font-size:2.2rem;}
+.hero p{max-width:500px;font-size:1rem;}
+
+/* SECTIONS */
+section{margin:40px 20px;}
+h2{text-align:center;color:#2563eb;margin-bottom:20px;}
+
+/* SUPPORT CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card{
+  height:260px;
+  border-radius:14px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.card img,.card .text{
+  position:absolute;inset:0;
+  transition:.4s;
+}
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.card .text{
+  background:#fff;
+  padding:20px;
+  text-align:center;
+  opacity:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.card:hover img{opacity:0;}
+.card:hover .text{opacity:1;}
+
+/* TOOLS */
+.tool{
+  max-width:400px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  text-align:center;
+}
+.tool select, .tool button{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+.tool button{
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* BREATHING */
+.breath-box{
+  text-align:center;
+  background:#dbeafe;
+  padding:25px;
+  border-radius:14px;
+}
+
+/* TIPS */
+.tips{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+.tip{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+/* HELPLINE */
+.helpline{
+  background:#fee2e2;
+  padding:20px;
+  border-radius:14px;
+  text-align:center;
+}
+.call{
+  display:inline-block;
+  margin:10px;
+  padding:12px 20px;
+  background:#dc2626;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+}
+
+/* FAQ */
+.faq{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:10px;
+  cursor:pointer;
+}
+.faq p{display:none;}
+.faq.active p{display:block;}
+
+/* AFFIRMATIONS */
+.affirm{
+  background:#ecfeff;
+  padding:20px;
+  border-radius:14px;
+  text-align:center;
+  font-size:1.2rem;
+}
+
+/* MUSIC */
+.music{
+  text-align:center;
+}
+.music button{
+  padding:12px 25px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.back-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: white;
+  color: #ff5a7a;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+  transition: background 0.3s, transform 0.2s;
+}
+</style>
+</head>
+
+<body>
+
+ <!-- GO BACK BUTTON -->
+<div class="back-btn" onclick="goBack()">
+  ← Back
+</div>
+<!-- HERO -->
+<div class="hero">
+  <h1>Mental Wellness & Emotional Support</h1>
+  <p>Your feelings matter. You are not alone.</p>
+</div>
+
+<!-- SUPPORT CARDS -->
+<section>
+<h2>Quick Support</h2>
+<div class="cards">
+  <div class="card">
+    <img src="STRESS AND ANXIETY.jpeg">
+    <div class="text">
+      <h3>Stress & Anxiety</h3>
+      <p>Breathing & relaxation techniques</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="SUPPORT.jpeg">
+    <div class="text">
+      <h3>Depression Support</h3>
+      <p>Know the signs & seek help early</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="sleepfocus.jpeg">
+    <div class="text">
+      <h3>Sleep & Focus</h3>
+      <p>Improve rest and mental clarity</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="counselling.jpeg">
+    <div class="text">
+      <h3>Counselling</h3>
+      <p>Professional and government support</p>
+    </div>
+  </div>
+</div>
+</section>
+<!-- MOOD TRACKER -->
+<section>
+  <h2>Self-Check Mood Tracker</h2>
+
+  <div class="tool">
+    <select id="moodSelect">
+      <option value="">How are you feeling?</option>
+      <option value="happy">😊 Happy</option>
+      <option value="okay">😐 Okay</option>
+      <option value="stressed">😟 Stressed</option>
+      <option value="low">😢 Low</option>
+    </select>
+
+    <button onclick="checkMood()">Check</button>
+    <p id="moodResult" style="margin-top:10px;"></p>
+
+    <small style="color:#555;">
+      Completely private • No data stored • Judgment-free
+    </small>
+  </div>
+</section>
+
+
+<!-- BREATHING -->
+<section>
+  <h2>Breathing Exercise</h2>
+
+  <div class="breath-box">
+    <h3 id="breathStage">Press Start</h3>
+    <h1 id="breathCount">0</h1>
+
+    <button onclick="startBreathing()">Start Breathing</button>
+    <button onclick="stopBreathing()">Stop</button>
+
+    <p style="margin-top:10px;color:#555;">
+      Inhale 4 sec • Hold 4 sec • Exhale 6 sec
+    </p>
+  </div>
+</section>
+
+
+<!-- TIPS -->
+<section>
+<h2>Mental Health Tips</h2>
+<div class="tips">
+  <div class="tip">Sleep 7–8 hours daily 😴</div>
+  <div class="tip">Talk to someone you trust 🧑‍🤝‍🧑</div>
+  <div class="tip">Exercise regularly 🏃</div>
+  <div class="tip">Limit screen time 📵</div>
+</div>
+</section>
+
+<!-- RESOURCES -->
+<section>
+  <h2>Government & Trusted Resources</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <img src="national helpline .jpeg">
+      <div class="text">
+        <h3>National Mental Health Programme</h3>
+        <p>India’s national initiative for mental healthcare.</p>
+        <a href="https://en.wikipedia.org/wiki/National_Mental_Health_Programme"
+           target="_blank">Read More →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="telemanas.jpeg">
+      <div class="text">
+        <h3>Tele MANAS</h3>
+        <p>24×7 government mental health support.</p>
+        <a href="https://en.wikipedia.org/wiki/Tele_Mental_Health_Assistance_and_Networking_Service"
+           target="_blank">Read More →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="kiran helpline.jpeg">
+      <div class="text">
+        <h3>Kiran Helpline</h3>
+        <p>Mental health rehabilitation helpline.</p>
+        <a href="https://en.wikipedia.org/wiki/Kiran_(mental_health_helpline)"
+           target="_blank">Read More →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HELPLINE -->
+<section>
+<h2>Emergency Helpline</h2>
+<div class="helpline">
+  <p>If you need immediate help</p>
+  <a class="call" href="tel:14416">📞 Tele MANAS</a>
+  <a class="call" href="tel:993116****">📞 Shubham</a>
+  <a class="call" href="tel:112">📞 Emergency</a>
+</div>
+</section>
+<!-- AFFIRMATIONS -->
+<section>
+<h2>Positive Affirmation</h2>
+<div class="affirm" id="affirmText">You are stronger than you think.</div>
+</section>
+
+
+
+<!-- FAQ -->
+<section>
+<h2>Common Questions</h2>
+<div class="faq"><h4>Is stress normal?</h4><p>Yes, but long-term stress needs care.</p></div>
+<div class="faq"><h4>When should I seek help?</h4><p>If feelings last more than 2 weeks.</p></div>
+<div class="faq"><h4>Is help confidential?</h4><p>Yes, your privacy is respected.</p></div>
+</section>
+<!-- MUSIC -->
+<section class="music">
+<h2>Relaxing Music</h2>
+<p>Play calming music if you want</p>
+<button onclick="toggleMusic()">Play / Pause</button>
+<audio id="music" src="Origami-chosic.com_.mp3" loop></audio>
+</section>
+
+
+
+
+<script>
+
+/* FAQ */
+document.querySelectorAll(".faq").forEach(f=>f.onclick=()=>f.classList.toggle("active"));
+
+
+function checkMood(){
+  const mood = document.getElementById("moodSelect").value;
+  const result = document.getElementById("moodResult");
+
+  if(!mood){
+    result.innerText = "Please select how you're feeling.";
+    return;
+  }
+
+  if(mood === "happy"){
+    result.innerText =
+      "😊 That's wonderful! Keep doing what makes you feel good.";
+  }
+
+  if(mood === "okay"){
+    result.innerText =
+      "😐 You're doing okay. A short walk or music might boost your mood.";
+  }
+
+  if(mood === "stressed"){
+    result.innerText =
+      "😟 You seem stressed. Try breathing exercises or talk to someone you trust.";
+  }
+
+  if(mood === "low"){
+    result.innerText =
+      "😢 You're not alone. Consider reaching out to a trusted person or helpline.";
+  }
+}
+
+
+
+/* BREATHING */
+let breathInterval;
+function startBreathing(){
+  const txt=document.getElementById("breathText");
+  let steps=["Inhale 😌","Hold 😐","Exhale 😮‍💨"];
+  let i=0;
+  breathInterval=setInterval(()=>{
+    txt.innerText=steps[i%3];
+    i++;
+  },2000);
+}
+function stopBreathing(){
+  clearInterval(breathInterval);
+  document.getElementById("breathText").innerText="Press Start";
+}
+
+let breathTimer;
+let stage = "";
+let count = 0;
+
+function startBreathing(){
+  clearInterval(breathTimer);
+
+  const stageText = document.getElementById("breathStage");
+  const counter = document.getElementById("breathCount");
+
+  let phases = [
+    {text:"Inhale 😌", time:4},
+    {text:"Hold 😐", time:4},
+    {text:"Exhale 😮‍💨", time:6}
+  ];
+
+  let phaseIndex = 0;
+  count = phases[phaseIndex].time;
+  stageText.innerText = phases[phaseIndex].text;
+  counter.innerText = count;
+
+  breathTimer = setInterval(()=>{
+    count--;
+    counter.innerText = count;
+
+    if(count === 0){
+      phaseIndex = (phaseIndex + 1) % phases.length;
+      stageText.innerText = phases[phaseIndex].text;
+      count = phases[phaseIndex].time;
+    }
+  },1000);
+}
+
+function stopBreathing(){
+  clearInterval(breathTimer);
+  document.getElementById("breathStage").innerText = "Press Start";
+  document.getElementById("breathCount").innerText = "0";
+}
+
+
+
+/* AFFIRMATIONS */
+const affirmations=[
+  "You matter.",
+  "It's okay to ask for help.",
+  "This feeling will pass.",
+  "You are not alone."
+];
+setInterval(()=>{
+  document.getElementById("affirmText").innerText=
+    affirmations[Math.floor(Math.random()*affirmations.length)];
+},4000);
+
+/* MUSIC */
+const music=document.getElementById("music");
+function toggleMusic(){
+  music.paused?music.play():music.pause();
+}
+
+function goBack() {
+    window.history.back();
+  }
+</script>
+
+</body>
+</html>

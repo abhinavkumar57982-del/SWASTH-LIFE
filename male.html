@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Male Health Section</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<style>
+/* ================= GENERAL ================= */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #B2F2F8;
+  color: #111;
+}
+
+/* ================= HERO ================= */
+.hero {
+  /* background: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),
+  url('fitness.jpg') center/cover no-repeat; */
+  background: #92c7ce;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: bold;
+  color: white;
+  /* border-radius: 20px; */
+}
+
+/* ================= SEARCH SECTION ================= */
+section {
+  margin: 20px;
+}
+
+.scheme-search-wrapper {
+  max-width: 700px;
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.scheme-search-wrapper input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.scheme-search-wrapper button {
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#schemeResult {
+  margin-top: 15px;
+  padding: 15px;
+  background: #eef2ff;
+  border-radius: 10px;
+}
+
+/* ================= FEATURE CARDS ================= */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  margin: 40px 20px;
+}
+
+.feature-card {
+  height: 300px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+
+.feature-card img,
+.feature-card .card-text {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.4s ease;
+}
+
+.feature-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-text {
+  background: #ffffff;
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-text h3 {
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+
+.card-text p {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.feature-card:hover img {
+  opacity: 0;
+}
+
+.feature-card:hover .card-text {
+  opacity: 1;
+}
+
+/* ================= FAQ ================= */
+.faq-section {
+  margin: 40px 20px;
+}
+
+.faq {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.faq p {
+  display: none;
+  margin-top: 10px;
+}
+
+.faq.active p {
+  display: block;
+}
+
+/* ================= CTA ================= */
+.cta-buttons {
+  text-align: center;
+  margin: 40px 20px;
+}
+
+.cta-buttons button {
+  margin: 10px;
+  background: #2563eb;
+  color: white;
+  padding: 14px 30px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.tools-section{
+  padding:40px 20px;
+  text-align:center;
+}
+
+.tools-section h1{
+  font-size:28px;
+}
+
+.subtitle{
+  color:#666;
+  margin-bottom:30px;
+}
+
+.tool-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+  max-width:1000px;
+  margin:auto;
+}
+
+.tool-card{
+  background:#ffffff;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.tool-card h2{
+  margin-bottom:15px;
+}
+
+.tool-card input,
+.tool-card select{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+.tool-card button{
+  width:100%;
+  padding:10px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.tool-card button:hover{
+  background:#1e40af;
+}
+.back-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: white;
+  color: #25bcc1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.back-btn:hover {
+  background: #ffe4ea;
+  transform: translateX(-3px);
+}
+
+
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+  .scheme-search-wrapper {
+    flex-direction: column;
+  }
+
+  .cta-buttons button {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+</style>
+</head>
+
+<body>
+  <!-- GO BACK BUTTON -->
+<div class="back-btn" onclick="goBack()">
+  ← Back
+</div>
+
+
+<!-- HERO -->
+<div class="hero">Men's Health & Wellness</div>
+
+<section>
+  
+
+  <div class="scheme-search-wrapper">
+    <input id="schemeSearch" placeholder="Search ANY Government Scheme">
+    <button onclick="searchScheme()">Search</button>
+  </div>
+
+  <div id="schemeResult"></div>
+</section>
+
+<!-- FEATURE CARDS -->
+<section class="feature-cards">
+  <div class="feature-card">
+    <img src="fitness.jpeg">
+    <div class="card-text">
+      <h3>Fitness & Exercise</h3>
+      <p>Daily workouts, stamina building and strength routines.</p>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <img src="hearts.jpeg">
+    <div class="card-text">
+      <h3>Heart Health</h3>
+      <p>Blood pressure control and heart-care guidance.</p>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <img src="nutritions.jpeg">
+    <div class="card-text">
+      <h3>Nutrition</h3>
+      <p>Balanced diet, protein intake and nutrition plans.</p>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <img src="mentalhealth.png">
+    <div class="card-text">
+      <h3>Mental Health</h3>
+      <p>Stress control, focus improvement and emotional wellbeing.</p>
+    </div>
+  </div>
+</section>
+<!-- SELECTED GOVERNMENT SCHEMES -->
+<section style="margin:40px 20px;">
+  <h2 style="text-align:center;color:#2563eb;">Selected Government Schemes</h2>
+
+  <div class="feature-cards">
+
+    <div class="feature-card">
+      <img src="PRADHAN MANTRI SURAKSHA BIMA YOJANA.jpeg" alt="Ayushman Bharat">
+      <div class="card-text">
+        <h3>Ayushman Bharat</h3>
+        <p>Free health insurance up to ₹5 lakh for eligible families.</p>
+        <a href="https://en.wikipedia.org/wiki/Ayushman_Bharat_Yojana"
+           target="_blank" style="color:#2563eb;font-weight:bold;">
+           Read More →
+        </a>
+      </div>
+    </div>
+
+    <div class="feature-card">
+      <img src="PMJAY.jpeg" alt="PM-JAY">
+      <div class="card-text">
+        <h3>PM-JAY</h3>
+        <p>Cashless treatment at government & empanelled hospitals.</p>
+        <a href="https://en.wikipedia.org/wiki/Pradhan_Mantri_Jan_Arogya_Yojana"
+           target="_blank" style="color:#2563eb;font-weight:bold;">
+           Read More →
+        </a>
+      </div>
+    </div>
+
+    <div class="feature-card">
+      <img src="ESANJIVANI.jpeg" alt="eSanjeevani">
+      <div class="card-text">
+        <h3>eSanjeevani</h3>
+        <p>Online doctor consultation via Government of India.</p>
+        <a href="https://en.wikipedia.org/wiki/ESanjeevani"
+           target="_blank" style="color:#2563eb;font-weight:bold;">
+           Read More →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="tools-section">
+  <h1>Men’s Health Tools</h1>
+  <p class="subtitle">Simple tools to track fitness & wellness</p>
+
+  <div class="tool-grid">
+
+    <!-- BMI CALCULATOR -->
+    <div class="tool-card">
+      <h2>BMI Calculator</h2>
+      <input type="number" id="height" placeholder="Height (cm)">
+      <input type="number" id="weight" placeholder="Weight (kg)">
+      <button onclick="calcBMI()">Calculate BMI</button>
+      <p id="bmiResult"></p>
+    </div>
+
+    <!-- CALORIE CALCULATOR -->
+    <div class="tool-card">
+      <h2>Daily Calorie Need</h2>
+      <input type="number" id="age" placeholder="Age">
+      <input type="number" id="calWeight" placeholder="Weight (kg)">
+      <input type="number" id="calHeight" placeholder="Height (cm)">
+      <select id="activity">
+        <option value="1.2">Low Activity</option>
+        <option value="1.55">Moderate Activity</option>
+        <option value="1.9">High Activity</option>
+      </select>
+      <button onclick="calcCalories()">Calculate Calories</button>
+      <p id="calResult"></p>
+    </div>
+
+    <!-- STEP / ACTIVITY TRACKER -->
+    <div class="tool-card">
+      <h2>Activity Tracker</h2>
+      <input type="number" id="steps" placeholder="Steps Today">
+      <button onclick="trackSteps()">Check Activity</button>
+      <p id="stepResult"></p>
+    </div>
+
+  </div>
+</section>
+<!-- EMERGENCY HELPLINE -->
+<section style="margin:40px 20px;">
+  <h2 style="text-align:center;color:#dc2626;">Emergency Helpline</h2>
+  <p style="text-align:center;color:#555;margin-bottom:20px;">
+    Immediate assistance for medical and mental health emergencies
+  </p>
+
+  <div class="feature-cards">
+
+    <div class="feature-card emergency">
+      <img src="AMBULANCE.jpeg" alt="Ambulance">
+      <div class="card-text">
+        <h3>Ambulance</h3>
+        <p>24×7 Emergency Medical Services</p>
+        <a href="tel:108" class="call-btn">📞 Call 108</a>
+      </div>
+    </div>
+
+    <div class="feature-card emergency">
+      <img src="HELPLINE.jpeg" alt="Women Helpline">
+      <div class="card-text">
+        <h3>Women Helpline</h3>
+        <p>Women safety & health support</p>
+        <a href="tel:181" class="call-btn">📞 Call 181</a>
+      </div>
+    </div>
+
+    <div class="feature-card emergency">
+      <img src="mentalhealth.png" alt="Mental Health">
+      <div class="card-text">
+        <h3>Mental Health</h3>
+        <p>Suicide prevention & emotional support</p>
+        <a href="tel:9152987821" class="call-btn">📞 Call Kiran</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2>Quick Tips</h2>
+
+  <div class="faq">
+    <h4>How to improve stamina?</h4>
+    <p>Regular exercise, sleep, hydration and a protein-rich diet.</p>
+  </div>
+
+  <div class="faq">
+    <h4>Which supplements are safe?</h4>
+    <p>Protein, omega-3 and multivitamins after doctor consultation.</p>
+  </div>
+
+  <div class="faq">
+    <h4>How to reduce stress?</h4>
+    <p>Meditation, workout and limiting screen time.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-buttons">
+  <!-- <button onclick="location.href='result.html'">Upload Prescription</button> -->
+  <button onclick="location.href='availability.html'">Medicine Availability</button>
+</section>
+
+<script>
+/* FAQ Toggle */
+document.querySelectorAll(".faq").forEach(faq => {
+  faq.onclick = () => faq.classList.toggle("active");
+});
+
+/* Unlimited Scheme Search */
+function searchScheme(){
+  const q = document.getElementById("schemeSearch").value.trim();
+  const result = document.getElementById("schemeResult");
+
+  if(!q){
+    result.innerHTML = "Please enter a scheme name.";
+    return;
+  }
+
+  const wiki =
+    "https://en.wikipedia.org/wiki/" +
+    q.replace(/ /g,"_");
+
+  result.innerHTML = `
+    <strong>${q}</strong><br>
+    <a href="${wiki}" target="_blank" style="color:#2563eb;">
+      Read complete details on Wikipedia →
+    </a>
+  `;
+}
+function calcBMI(){
+  const h = document.getElementById("height").value / 100;
+  const w = document.getElementById("weight").value;
+  if(!h || !w) return;
+
+  const bmi = (w / (h*h)).toFixed(1);
+  let status = "Normal";
+
+  if(bmi < 18.5) status = "Underweight";
+  else if(bmi >= 25) status = "Overweight";
+  else if(bmi >= 30) status = "Obese";
+
+  document.getElementById("bmiResult").innerText =
+    `BMI: ${bmi} (${status})`;
+}
+
+function calcCalories(){
+  const age = document.getElementById("age").value;
+  const w = document.getElementById("calWeight").value;
+  const h = document.getElementById("calHeight").value;
+  const act = document.getElementById("activity").value;
+
+  if(!age || !w || !h){
+    document.getElementById("calResult").innerText =
+      "Please fill all fields";
+    return;
+  }
+
+  // Mifflin-St Jeor Equation (Male)
+  const bmr = 10*w + 6.25*h - 5*age + 5;
+  const calories = Math.round(bmr * act);
+
+  document.getElementById("calResult").innerText =
+    `Daily Calories Needed: ${calories} kcal`;
+}
+
+
+function trackSteps(){
+  const steps = +document.getElementById("steps").value;
+  let msg = "Start moving! 🚶";
+
+  if(steps >= 10000) msg = "Excellent activity 💪";
+  else if(steps >= 6000) msg = "Good job 👍";
+  else if(steps >= 3000) msg = "Keep going 🙂";
+
+  document.getElementById("stepResult").innerText = msg;
+}
+
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+
+
+
+</body>
+</html>
